@@ -10,7 +10,8 @@ import java.awt.Graphics;
  */
 public class Border {
     private final int x, y, width, height;
-    private final static Color COLOR = Color.BLACK;
+    private final static Color LighterGray = new Color(105,105,105);
+    private final static Color Silver = new Color(192,192,192);
     
     Border(int x, int y, int width, int height) {
         this.x = x;
@@ -20,7 +21,10 @@ public class Border {
     }
     
     public void draw(Graphics g) {
-        g.setColor(COLOR);
+        g.setColor(Silver);
+        g.fillRect(x-5, y-5, width+10, height+10);
+        
+        g.setColor(LighterGray);
         g.fillRect(x, y, width, height);
     }
 

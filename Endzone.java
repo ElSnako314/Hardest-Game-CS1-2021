@@ -16,7 +16,7 @@ public class Endzone {
     private int x, y;
     private final int width, height;
     private final boolean isFinish;
-    private final static Color COLOR = Color.GREEN;
+    private final static Color Forest = new Color(34,139,34);
 
     Endzone(int x, int y, int width, int height, boolean isFinish) {
         this.x = x;
@@ -27,7 +27,7 @@ public class Endzone {
     }
 
     public void draw(Graphics g) {
-        g.setColor(COLOR);
+        g.setColor(Forest);
         g.fillRect(x, y, width, height);
     }
 
