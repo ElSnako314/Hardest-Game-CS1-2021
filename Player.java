@@ -15,7 +15,7 @@ import java.awt.Graphics;
 public class Player {
     private int x, y;
     //"final" means that this variable cannot be changed, while "static" means that color does not change from one player to another
-    private final static int WIDTH = 15, HEIGHT = 15;
+    private final static int WIDTH = 20, HEIGHT = 20, SPEED = 2;
     private final static Color INNERCOLOR = Color.RED;
     private final static Color COLOR = Color.BLACK;
     
@@ -29,8 +29,14 @@ public class Player {
         g.fillRect(x, y, WIDTH, HEIGHT);
         
         g.setColor(INNERCOLOR);
-        g.fillRect(x+2, y+2, WIDTH-4, HEIGHT-4);
+        g.fillRect(x+1, y+1, WIDTH-2, HEIGHT-2);
         
+    }
+    
+    public void move(int dx, int dy) {
+        x += SPEED * dx;
+        y += SPEED * dy;
+
     }
 
     public int getX() {

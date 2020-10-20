@@ -21,10 +21,18 @@ public class HardestGame extends JPanel implements KeyListener, MouseListener {
     private Timer timer;
     private int frameCount = 0;
     private Player player;
-    
+    private Border border;
+    private Enemy enemy1, enemy2;
+    private Endzone start;
+    private Endzone finish;
     
     public HardestGame() {
-        this.player = new Player((int) (800*Math.random()), (int) (600*Math.random()));
+        this.border = new Border(50, 50, 700, 500);
+        this.player = new Player(65, 290);
+        this.enemy1 = new Enemy (285, 285, 5, 5);
+        this.enemy2 = new Enemy (485, 285, 5, 5);
+        this.start = new Endzone (50, 50, 50, 500, true);
+        this.finish = new Endzone (700, 50, 50, 500, false);
         timer = new Timer();
         timer.scheduleAtFixedRate(new ScheduleTask(), 100, 1000/12);
     }
@@ -38,7 +46,33 @@ public class HardestGame extends JPanel implements KeyListener, MouseListener {
         
         this.setBackground(Color.CYAN);		
         
+        border.draw(g);
+        start.draw(g);
+        finish.draw(g);
+        enemy1.draw(g);
+        enemy2.draw(g);
         player.draw(g);
+        
+        //Moves the enemies
+            if (enemy1.getY() < border.getY()) {
+                enemy1.move(1);
+            }
+            else if (enemy1.getY() > (border.getY() + border.getHeight())) {
+                enemy1.move(-1);
+            }
+            else {
+                enemy1.move(-1);
+            }
+            
+            if (enemy2.getY() < border.getY()) {
+                enemy2.move(1);
+            }
+            else if (enemy2.getY() > border.getY() + border.getHeight()) {
+                enemy2.move(-1);
+            }
+            else {
+                enemy2.move(1);
+            }
     }
      
     private class ScheduleTask extends TimerTask {
@@ -51,7 +85,7 @@ public class HardestGame extends JPanel implements KeyListener, MouseListener {
     
     public static void main(String[] args) {
         //Makes the window that pops up
-        JFrame j = new JFrame("Small Box in Slightly Larger Box");
+        JFrame j = new JFrame("Currently In Development");
         //Constructor
         Container c = new HardestGame();
         j.add(c);
@@ -62,14 +96,28 @@ public class HardestGame extends JPanel implements KeyListener, MouseListener {
         j.setLocationRelativeTo(null);
         j.addKeyListener((KeyListener) c);
         j.addMouseListener((MouseListener) c);
+        //Calls the method that makes the enemies move
+
     }
     
-     @Override
+    @Override
     public void keyPressed(KeyEvent e) {
         System.out.printf("\nKeyCode: %d was pressed",e.getKeyCode());
+        if (e.getKeyCode() == 87) {
+            player.move(0, -1);
+        }
+        if (e.getKeyCode() == 65) {
+            player.move(-1, 0);
+        }
+        if (e.getKeyCode() == 83) {
+            player.move(0, 1);
+        }
+        if (e.getKeyCode() == 68) {
+            player.move(1, 0);
+        }
     }
     
-     @Override
+    @Override
     public void keyReleased(KeyEvent e) {
         
     }
